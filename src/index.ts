@@ -101,8 +101,10 @@ program
   .description("Show BP balance and recent transactions")
   .action(wrap(balanceCommand));
 
-function wrap(fn: (...args: unknown[]) => Promise<void>) {
-  return (...args: unknown[]) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function wrap(fn: (...args: any[]) => Promise<void>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (...args: any[]) => {
     fn(...args).catch((err: Error) => {
       console.error(chalk.red("Error: ") + err.message);
       process.exit(1);
